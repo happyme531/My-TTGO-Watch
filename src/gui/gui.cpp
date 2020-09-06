@@ -88,6 +88,7 @@ void gui_loop( void ) {
         }
         else {
             powermgm_set_event( POWERMGM_STANDBY_REQUEST );
+            delay(100);
         }
     }
     // if we run on normal mode
@@ -97,6 +98,7 @@ void gui_loop( void ) {
         }
         else {
             powermgm_set_event( POWERMGM_STANDBY_REQUEST );
+            delay(100);
         }
     }
 }

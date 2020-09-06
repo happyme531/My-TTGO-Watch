@@ -179,6 +179,9 @@ void display_read_config( void ) {
 }
 
 uint32_t display_get_timeout( void ) {
+    if(millis() - powermgm_get_last_wakeup_tick() - lv_disp_get_inactive_time(nullptr) < 50){ //No operation since wakeup
+      return( display_config.timeout / 3 );
+    };
     return( display_config.timeout );
 }
 

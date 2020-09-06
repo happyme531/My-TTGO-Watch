@@ -63,5 +63,11 @@
      * @return  EventBits_t    event state
      */
     EventBits_t powermgm_get_event( EventBits_t bits );
+    /*
+     * @brief get the system tick at last wakeup event
+     * 
+     * @return uint32_t tick in millisecond
+     */
+    uint32_t powermgm_get_last_wakeup_tick();
 
 #endif // _POWERMGM_H

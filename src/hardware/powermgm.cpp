@@ -43,6 +43,8 @@
 EventGroupHandle_t powermgm_status = NULL;
 portMUX_TYPE powermgmMux = portMUX_INITIALIZER_UNLOCKED;
 
+uint32_t lastWakeupTick = 0;
+
 void powermgm_setup( void ) {
 
     powermgm_status = xEventGroupCreate();
@@ -99,6 +101,7 @@ void powermgm_loop( void ) {
         log_i("uptime: %d", millis() / 1000 );
 
         ttgo->startLvglTick();
+        lastWakeupTick = millis();
         lv_disp_trig_activity(NULL);
 
         if ( powermgm_get_event( POWERMGM_SILENCE_WAKEUP_REQUEST ) ) {
@@ -187,3 +190,7 @@ EventBits_t powermgm_get_event( EventBits_t bits ) {
     portEXIT_CRITICAL(&powermgmMux);
     return( temp );
 }
+
+uint32_t powermgm_get_last_wakeup_tick(){
+    return lastWakeupTick;
+};
